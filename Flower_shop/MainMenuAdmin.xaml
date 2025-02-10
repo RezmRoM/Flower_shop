@@ -1,0 +1,484 @@
+﻿<Window x:Class="Flower_shop.MainMenuAdmin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flower_shop"
+        mc:Ignorable="d"
+        Title="Flower Shop - Панель администратора" 
+        Height="800" 
+        Width="1400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
+    <Window.Resources>
+        <!-- Анимации -->
+        <Storyboard x:Key="CardHover">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                            To="20" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                            To="1.02" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                            To="1.02" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <Storyboard x:Key="CardUnhover">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                            To="10" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                            To="1" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                            To="1" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <!-- Шаблон карточки товара -->
+        <DataTemplate x:Key="ProductCardTemplate">
+            <Border x:Name="cardBorder" 
+                    Width="300" 
+                    Height="450"
+                    Background="White"
+                    CornerRadius="15"
+                    Margin="10"
+                    BorderThickness="1"
+                    BorderBrush="#FFE4E4E4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" 
+                                    ShadowDepth="0"
+                                    Color="#FFB6C1"/>
+                </Border.Effect>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                        <BeginStoryboard Storyboard="{StaticResource CardHover}"/>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                        <BeginStoryboard Storyboard="{StaticResource CardUnhover}"/>
+                    </EventTrigger>
+                </Border.Triggers>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Изображение товара -->
+                    <Border Grid.Row="0" 
+                            Background="#FFF5F5F5"
+                            CornerRadius="15,15,0,0">
+                        <Grid>
+                            <Image Source="{Binding Image_Url}"
+                                   Stretch="UniformToFill"
+                                   Height="200"/>
+                            <Button Content="Изменить фото"
+                                    Style="{StaticResource ModernButton}"
+                                    Width="120"
+                                    Height="35"
+                                    Margin="10"
+                                    VerticalAlignment="Bottom"
+                                    Click="ChangeImage_Click"
+                                    Opacity="0">
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.MouseEnter">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                               To="1" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="Button.MouseLeave">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                               To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Информация о товаре -->
+                    <StackPanel Grid.Row="1" Margin="15,10">
+                        <TextBlock Text="{Binding Product_Name}"
+                                 FontSize="18"
+                                 FontWeight="SemiBold"
+                                 TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding Description}"
+                                 FontSize="14"
+                                 Foreground="#666666"
+                                 TextWrapping="Wrap"
+                                 Margin="0,5"/>
+                    </StackPanel>
+
+                    <!-- Категория и поставщик -->
+                    <StackPanel Grid.Row="2" Margin="15,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Категория: "
+                                     Foreground="#666666"/>
+                            <ComboBox ItemsSource="{Binding Categories}"
+                                    SelectedItem="{Binding Category}"
+                                    Width="150"
+                                    Style="{StaticResource ModernComboBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Поставщик: "
+                                     Foreground="#666666"/>
+                            <ComboBox ItemsSource="{Binding Suppliers}"
+                                    SelectedItem="{Binding Postavchik}"
+                                    Width="150"
+                                    Style="{StaticResource ModernComboBox}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Цена и количество -->
+                    <Grid Grid.Row="3" Margin="15,10,15,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Цена:"
+                                     Foreground="#666666"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="-"
+                                        Style="{StaticResource ModernButton}"
+                                        Width="30"
+                                        Height="30"
+                                        Click="DecrementPrice_Click"/>
+                                <TextBox Text="{Binding Price, StringFormat='{}{0:N2}'}"
+                                         Style="{StaticResource ModernTextBox}"
+                                         Width="80"
+                                         Margin="5,0"/>
+                                <Button Content="+"
+                                        Style="{StaticResource ModernButton}"
+                                        Width="30"
+                                        Height="30"
+                                        Click="IncrementPrice_Click"/>
+                            </StackPanel>
+
+                            <TextBlock Text="Количество:"
+                                     Foreground="#666666"
+                                     Margin="0,5,0,0"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="-"
+                                        Style="{StaticResource ModernButton}"
+                                        Width="30"
+                                        Height="30"
+                                        Click="DecrementQuantity_Click"/>
+                                <TextBox Text="{Binding Quantity}"
+                                         Style="{StaticResource ModernTextBox}"
+                                         Width="80"
+                                         Margin="5,0"/>
+                                <Button Content="+"
+                                        Style="{StaticResource ModernButton}"
+                                        Width="30"
+                                        Height="30"
+                                        Click="IncrementQuantity_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Button Grid.Column="1"
+                                Content="Удалить"
+                                Style="{StaticResource ModernButton}"
+                                Width="100"
+                                Height="35"
+                                Margin="10,0,0,0"
+                                Click="DeleteProduct_Click">
+                            <Button.Triggers>
+                                <EventTrigger RoutedEvent="Button.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          To="#FFFF4444" Duration="0:0:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Шаблон карточки добавления -->
+        <DataTemplate x:Key="AddCardTemplate">
+            <Border Width="300" 
+                    Height="450"
+                    Background="Transparent"
+                    CornerRadius="15"
+                    Margin="10"
+                    BorderThickness="2"
+                    BorderBrush="#FFB6C1"
+                    Style="{StaticResource DashedBorderStyle}">
+                <Button Content="+"
+                        Style="{StaticResource ModernButton}"
+                        Width="60"
+                        Height="60"
+                        FontSize="30"
+                        Click="AddProduct_Click"/>
+            </Border>
+        </DataTemplate>
+
+        <!-- Стили -->
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#FFB6C1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border x:Name="border" 
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20"
+                                    BorderThickness="0">
+                                <ContentPresenter HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF8C4B77"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                        ShadowDepth="0" 
+                                                        Color="#FFB6C1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF6B3957"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="WindowButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#FF8C4B77"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#20FF8C4B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                BorderThickness="1"
+                                BorderBrush="#FFB6C1">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF8C4B77"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                        ShadowDepth="0" 
+                                                        Color="#FFB6C1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFB6C1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#FFF5F5F5"/>
+            <Setter Property="AlternatingRowBackground" Value="White"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#FFE4E4E4"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#FFE4E4E4"/>
+            <Setter Property="RowHeight" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFB6C1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="border" 
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10">
+                                <Grid>
+                                    <ToggleButton x:Name="ToggleButton"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                Background="{TemplateBinding Background}"
+                                                Focusable="false"
+                                                IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Path x:Name="Arrow" 
+                                              Fill="#FF8C4B77"
+                                              Data="M0,0 L8,8 L16,0"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Center"
+                                              Margin="0,0,10,0"/>
+                                    </ToggleButton>
+                                    <ContentPresenter x:Name="ContentSite"
+                                                    Content="{TemplateBinding SelectionBoxItem}"
+                                                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                    ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                    Margin="10,3,30,3"
+                                                    VerticalAlignment="Center"/>
+                                    <Popup x:Name="Popup"
+                                           Placement="Bottom"
+                                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                                           AllowsTransparency="True" 
+                                           Focusable="False"
+                                           PopupAnimation="Slide">
+                                        <Grid x:Name="DropDown"
+                                              SnapsToDevicePixels="True"
+                                              MinWidth="{TemplateBinding ActualWidth}"
+                                              MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                            <Border x:Name="DropDownBorder"
+                                                    Background="White"
+                                                    BorderBrush="#FFB6C1"
+                                                    BorderThickness="1"
+                                                    CornerRadius="0,0,10,10">
+                                                <ScrollViewer Margin="0,4,0,4" SnapsToDevicePixels="True">
+                                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                                </ScrollViewer>
+                                            </Border>
+                                        </Grid>
+                                    </Popup>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF8C4B77"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="Arrow" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="180" CenterX="8" CenterY="4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <!-- Основное содержимое -->
+    <Border Background="White" 
+            CornerRadius="20" 
+            Margin="10"
+            x:Name="mainBorder"
+            Opacity="0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Верхняя панель с кнопками управления окном -->
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right" 
+                          Margin="0,0,5,0">
+                    <Button Style="{StaticResource WindowButtonStyle}"
+                            Content="—"
+                            Click="MinimizeButton_Click"/>
+                    <Button Style="{StaticResource WindowButtonStyle}"
+                            Content="☐"
+                            Click="MaximizeButton_Click"/>
+                    <Button Style="{StaticResource WindowButtonStyle}"
+                            Content="✕"
+                            Click="CloseButton_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Заголовок -->
+            <TextBlock Grid.Row="1" 
+                      Text="Управление товарами"
+                      FontSize="24"
+                      FontWeight="SemiBold"
+                      Foreground="#FF8C4B77"
+                      HorizontalAlignment="Center"
+                      Margin="0,20,0,20"/>
+
+            <!-- Список товаров -->
+            <ScrollViewer Grid.Row="2" 
+                         Margin="20"
+                         VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ProductsItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="mainBorder"
+                                   Storyboard.TargetProperty="Opacity"
+                                   From="0" To="1" Duration="0:0:0.3"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+</Window>

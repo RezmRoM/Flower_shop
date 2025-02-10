@@ -1,0 +1,135 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\WPF\\Flower_shop\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\mainmenucustomer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenucustomer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|d:\\wpf\\flower_shop\\flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Registration.xaml.cs",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\Registration.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml.cs",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\Registration.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\Registration.xaml.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBgAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T19:05:16.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainMenuAdmin.xaml",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuAdmin.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuAdmin.xaml",
+              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:35:35.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainMenuCustomer.xaml",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuCustomer.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuCustomer.xaml",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuCustomer.xaml",
+              "RelativeToolTip": "Flower_shop\\MainMenuCustomer.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:35:20.727Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainMenuAdmin.xaml.cs",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuAdmin.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml.cs",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\MainMenuAdmin.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAMwOYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T19:15:28.518Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Registration.xaml",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\Registration.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\Registration.xaml",
+              "RelativeToolTip": "Flower_shop\\Registration.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:26:39.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\MainWindow.xaml",
+              "RelativeToolTip": "Flower_shop\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:20:23.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "D:\\WPF\\Flower_shop\\Flower_shop\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml.cs",
+              "ToolTip": "D:\\WPF\\Flower_shop\\Flower_shop\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T18:20:21.783Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
