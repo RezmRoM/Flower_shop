@@ -142,53 +142,53 @@
         </Style>
     </Window.Resources>
 
-    <Border Background="White" 
-            CornerRadius="20" 
-            Margin="10">
-        <Border.Effect>
-            <DropShadowEffect BlurRadius="15" 
-                            Direction="-90" 
-                            RenderingBias="Quality" 
-                            ShadowDepth="2"
-                            Color="#FFCCCCCC"/>
-        </Border.Effect>
-        
-        <Grid x:Name="mainContent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Border Background="White" 
+                CornerRadius="20" 
+                Margin="10">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" 
+                                Direction="-90" 
+                                RenderingBias="Quality" 
+                                ShadowDepth="2"
+                                Color="#FFCCCCCC"/>
+            </Border.Effect>
 
-            <!-- Верхняя панель с кнопками управления окном -->
-            <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal" 
-                          HorizontalAlignment="Right" 
-                          Margin="0,0,5,0">
-                    <Button Style="{StaticResource WindowButtonStyle}"
-                            Content="—"
-                            Click="MinimizeButton_Click"/>
-                    <Button Style="{StaticResource WindowButtonStyle}"
-                            Content="✕"
-                            Click="CloseButton_Click"/>
-                </StackPanel>
-            </Grid>
+            <Grid x:Name="mainContent">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <!-- Основное содержимое -->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="450"/>
-                </Grid.ColumnDefinitions>
+                <!-- Верхняя панель с кнопками управления окном -->
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" 
+                              HorizontalAlignment="Right" 
+                              Margin="0,0,5,0">
+                        <Button Style="{StaticResource WindowButtonStyle}"
+                                Content="—"
+                                Click="MinimizeButton_Click"/>
+                        <Button Style="{StaticResource WindowButtonStyle}"
+                                Content="✕"
+                                Click="CloseButton_Click"/>
+                    </StackPanel>
+                </Grid>
 
-                <!-- Левая декоративная панель -->
-                <Border Grid.Column="0">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#FFB6C1" Offset="0"/>
-                            <GradientStop Color="#FFDAB9" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Grid>
+                <!-- Основное содержимое -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="450"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Левая декоративная панель -->
+                    <Border Grid.Column="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#FFB6C1" Offset="0"/>
+                                <GradientStop Color="#FFDAB9" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
                         <StackPanel VerticalAlignment="Center" 
                                   HorizontalAlignment="Center">
                             <TextBlock Text="Flower Shop"
@@ -208,99 +208,100 @@
                                      Margin="0,10,0,0"
                                      HorizontalAlignment="Center"/>
                         </StackPanel>
+                    </Border>
+
+                    <!-- Правая панель с формой регистрации -->
+                    <Grid Grid.Column="1" Margin="30">
+                        <StackPanel>
+                            <TextBlock Text="Регистрация"
+                                     FontSize="24"
+                                     FontWeight="SemiBold"
+                                     Foreground="#FF8C4B77"
+                                     HorizontalAlignment="Center"
+                                     Margin="0,0,0,30"/>
+
+                            <TextBlock Text="Имя:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtName"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,15"
+                                    ToolTip="Введите ваше имя"/>
+
+                            <TextBlock Text="Фамилия:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtSurname"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,15"
+                                    ToolTip="Введите вашу фамилию"/>
+
+                            <TextBlock Text="Номер телефона:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtPhone"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,15"
+                                    ToolTip="Введите номер телефона в формате +79XXXXXXXXX"/>
+
+                            <TextBlock Text="Адрес:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtAddress"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,15"
+                                    ToolTip="Введите ваш адрес"/>
+
+                            <TextBlock Text="Логин:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtLogin"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,15"
+                                    ToolTip="Придумайте логин для входа в систему"/>
+
+                            <TextBlock Text="Пароль:"
+                                     Foreground="#FF8C4B77"
+                                     Margin="0,0,0,5"/>
+                            <TextBox x:Name="txtPassword"
+                                    Style="{StaticResource ModernTextBox}"
+                                    Height="40"
+                                    Margin="0,0,0,30"
+                                    ToolTip="Придумайте пароль (минимум 6 символов)"/>
+
+                            <Button x:Name="btnRegister"
+                                    Content="Зарегистрироваться"
+                                    Style="{StaticResource ModernButton}"
+                                    Width="200"
+                                    Click="registrationButton_Click"
+                                    IsEnabled="False"
+                                    ToolTip="Нажмите для завершения регистрации"/>
+                        </StackPanel>
                     </Grid>
-                </Border>
+                </Grid>
 
-                <!-- Правая панель с формой регистрации -->
-                <Grid Grid.Column="1" Margin="30">
-                    <StackPanel>
-                        <TextBlock Text="Регистрация"
-                                 FontSize="24"
-                                 FontWeight="SemiBold"
-                                 Foreground="#FF8C4B77"
-                                 HorizontalAlignment="Center"
-                                 Margin="0,0,0,30"/>
-
-                        <TextBlock Text="Имя:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="nameBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,15"
-                                ToolTip="Введите ваше имя"/>
-
-                        <TextBlock Text="Фамилия:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="surnameBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,15"
-                                ToolTip="Введите вашу фамилию"/>
-
-                        <TextBlock Text="Номер телефона:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="phoneBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,15"
-                                ToolTip="Введите номер телефона в формате +79XXXXXXXXX"/>
-
-                        <TextBlock Text="Адрес:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="adressBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,15"
-                                ToolTip="Введите ваш адрес"/>
-
-                        <TextBlock Text="Логин:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="loginBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,15"
-                                ToolTip="Придумайте логин для входа в систему"/>
-
-                        <TextBlock Text="Пароль:"
-                                 Foreground="#FF8C4B77"
-                                 Margin="0,0,0,5"/>
-                        <TextBox x:Name="passwordBox"
-                                Style="{StaticResource ModernTextBox}"
-                                Height="40"
-                                Margin="0,0,0,30"
-                                ToolTip="Придумайте пароль (минимум 6 символов)"/>
-
-                        <Button x:Name="registration"
-                                Content="Зарегистрироваться"
-                                Style="{StaticResource ModernButton}"
-                                Width="200"
-                                Click="registrationButton_Click"
-                                IsEnabled="False"
-                                ToolTip="Нажмите для завершения регистрации"/>
+                <!-- Индикатор загрузки -->
+                <Grid x:Name="loadingIndicator" 
+                      Style="{StaticResource LoadingIndicator}"
+                      Panel.ZIndex="1000"
+                      Grid.Row="1">
+                    <StackPanel HorizontalAlignment="Center" 
+                               VerticalAlignment="Center">
+                        <TextBlock Text="Пожалуйста, подождите..."
+                                 Foreground="White"
+                                 FontSize="18"
+                                 Margin="0,0,0,10"/>
+                        <ProgressBar Width="200" 
+                                   Height="4" 
+                                   IsIndeterminate="True"/>
                     </StackPanel>
                 </Grid>
             </Grid>
-        </Grid>
-
-        <!-- Добавляем индикатор загрузки -->
-        <Grid x:Name="loadingIndicator" 
-              Style="{StaticResource LoadingIndicator}"
-              Panel.ZIndex="1000">
-            <StackPanel HorizontalAlignment="Center" 
-                       VerticalAlignment="Center">
-                <TextBlock Text="Пожалуйста, подождите..."
-                         Foreground="White"
-                         FontSize="18"
-                         Margin="0,0,0,10"/>
-                <ProgressBar Width="200" 
-                           Height="4" 
-                           IsIndeterminate="True"/>
-            </StackPanel>
-        </Grid>
-    </Border>
+        </Border>
+    </Grid>
 </Window>

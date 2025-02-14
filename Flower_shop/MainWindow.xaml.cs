@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MenuManager;
 
 namespace Flower_shop
 {
@@ -38,22 +37,13 @@ namespace Flower_shop
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            var result = MessageBox.Show("Вы уверены, что хотите выйти из приложения?", 
-                                       "Подтверждение выхода", 
-                                       MessageBoxButton.YesNo, 
+            var result = MessageBox.Show("Вы уверены, что хотите выйти из приложения?",
+                                       "Подтверждение выхода",
+                                       MessageBoxButton.YesNo,
                                        MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
-            }
-        }
-
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
             }
         }
 
@@ -64,9 +54,9 @@ namespace Flower_shop
 
             if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Пожалуйста, заполните все поля.", 
-                              "Ошибка валидации", 
-                              MessageBoxButton.OK, 
+                MessageBox.Show("Пожалуйста, заполните все поля.",
+                              "Ошибка валидации",
+                              MessageBoxButton.OK,
                               MessageBoxImage.Warning);
                 return;
             }
@@ -75,17 +65,17 @@ namespace Flower_shop
             {
                 // Показываем индикатор загрузки
                 loadingIndicator.Visibility = Visibility.Visible;
-                mainContent.IsEnabled = false;
+                rootContent.IsEnabled = false;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     await connection.OpenAsync();
                     string query = "SELECT Rol FROM FS_Polzovatel WHERE login = @login AND password = @password";
-                    
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@login", login);
-                        command.Parameters.AddWithValue("@password", HashPassword(password));
+                        command.Parameters.AddWithValue("@password", password);
 
                         object result = await command.ExecuteScalarAsync();
 
@@ -102,10 +92,13 @@ namespace Flower_shop
                                 case "Покупатель":
                                     nextWindow = new MainMenuCustomer();
                                     break;
+                                case "Менеджер":
+                                    nextWindow = new MenegerMainMenu();
+                                    break;
                                 default:
-                                    MessageBox.Show("Неизвестная роль пользователя.", 
-                                                  "Ошибка авторизации", 
-                                                  MessageBoxButton.OK, 
+                                    MessageBox.Show("Неизвестная роль пользователя.",
+                                                  "Ошибка авторизации",
+                                                  MessageBoxButton.OK,
                                                   MessageBoxImage.Error);
                                     return;
                             }
@@ -118,9 +111,9 @@ namespace Flower_shop
                         }
                         else
                         {
-                            MessageBox.Show("Неверный логин или пароль.", 
-                                          "Ошибка авторизации", 
-                                          MessageBoxButton.OK, 
+                            MessageBox.Show("Неверный логин или пароль.",
+                                          "Ошибка авторизации",
+                                          MessageBoxButton.OK,
                                           MessageBoxImage.Warning);
                         }
                     }
@@ -128,25 +121,23 @@ namespace Flower_shop
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Ошибка при подключении к базе данных: {ex.Message}\n\nПожалуйста, проверьте подключение к сети и попробуйте снова.", 
-                              "Ошибка базы данных", 
-                              MessageBoxButton.OK, 
+                MessageBox.Show($"Ошибка при подключении к базе данных: {ex.Message}",
+                              "Ошибка базы данных",
+                              MessageBoxButton.OK,
                               MessageBoxImage.Error);
-                // TODO: Добавить логирование ошибки
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Произошла непредвиденная ошибка: {ex.Message}\n\nПожалуйста, обратитесь к администратору.", 
-                              "Системная ошибка", 
-                              MessageBoxButton.OK, 
+                MessageBox.Show($"Произошла непредвиденная ошибка: {ex.Message}",
+                              "Системная ошибка",
+                              MessageBoxButton.OK,
                               MessageBoxImage.Error);
-                // TODO: Добавить логирование ошибки
             }
             finally
             {
                 // Скрываем индикатор загрузки
                 loadingIndicator.Visibility = Visibility.Collapsed;
-                mainContent.IsEnabled = true;
+                rootContent.IsEnabled = true;
             }
         }
 

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Input;
@@ -22,13 +20,13 @@ namespace Flower_shop
 
         private void InitializeValidation()
         {
-            nameBox.TextChanged += ValidateInput;
-            surnameBox.TextChanged += ValidateInput;
-            phoneBox.TextChanged += ValidateInput;
-            adressBox.TextChanged += ValidateInput;
-            loginBox.TextChanged += ValidateInput;
-            passwordBox.TextChanged += ValidateInput;
-            
+            txtName.TextChanged += ValidateInput;
+            txtSurname.TextChanged += ValidateInput;
+            txtPhone.TextChanged += ValidateInput;
+            txtAddress.TextChanged += ValidateInput;
+            txtLogin.TextChanged += ValidateInput;
+            txtPassword.TextChanged += ValidateInput;
+
             ValidateInput(null, null);
         }
 
@@ -57,15 +55,6 @@ namespace Flower_shop
             }
         }
 
-        private string HashPassword(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashedBytes);
-            }
-        }
-
         private bool ValidatePhoneNumber(string phoneNumber)
         {
             return PhoneRegex.IsMatch(phoneNumber);
@@ -73,26 +62,26 @@ namespace Flower_shop
 
         private void ValidateInput(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            bool isValid = !string.IsNullOrWhiteSpace(nameBox.Text) &&
-                          !string.IsNullOrWhiteSpace(surnameBox.Text) &&
-                          !string.IsNullOrWhiteSpace(phoneBox.Text) &&
-                          !string.IsNullOrWhiteSpace(adressBox.Text) &&
-                          !string.IsNullOrWhiteSpace(loginBox.Text) &&
-                          !string.IsNullOrWhiteSpace(passwordBox.Text) &&
-                          passwordBox.Text.Length >= MIN_PASSWORD_LENGTH &&
-                          ValidatePhoneNumber(phoneBox.Text);
+            bool isValid = !string.IsNullOrWhiteSpace(txtName.Text) &&
+                          !string.IsNullOrWhiteSpace(txtSurname.Text) &&
+                          !string.IsNullOrWhiteSpace(txtPhone.Text) &&
+                          !string.IsNullOrWhiteSpace(txtAddress.Text) &&
+                          !string.IsNullOrWhiteSpace(txtLogin.Text) &&
+                          !string.IsNullOrWhiteSpace(txtPassword.Text) &&
+                          txtPassword.Text.Length >= MIN_PASSWORD_LENGTH &&
+                          ValidatePhoneNumber(txtPhone.Text);
 
-            registration.IsEnabled = isValid;
+            btnRegister.IsEnabled = isValid;
         }
 
         private async void registrationButton_Click(object sender, RoutedEventArgs e)
         {
-            string firstName = nameBox.Text;
-            string lastName = surnameBox.Text;
-            string phoneNumber = phoneBox.Text;
-            string address = adressBox.Text;
-            string login = loginBox.Text;
-            string password = passwordBox.Text;
+            string firstName = txtName.Text;
+            string lastName = txtSurname.Text;
+            string phoneNumber = txtPhone.Text;
+            string address = txtAddress.Text;
+            string login = txtLogin.Text;
+            string password = txtPassword.Text;
 
             if (string.IsNullOrWhiteSpace(firstName) ||
                 string.IsNullOrWhiteSpace(lastName) ||
@@ -128,7 +117,6 @@ namespace Flower_shop
 
             try
             {
-                // Показываем индикатор загрузки
                 loadingIndicator.Visibility = Visibility.Visible;
                 mainContent.IsEnabled = false;
 
@@ -136,7 +124,6 @@ namespace Flower_shop
                 {
                     await connection.OpenAsync();
 
-                    // Проверка существования пользователя
                     string checkQuery = "SELECT COUNT(*) FROM FS_Polzovatel WHERE Login = @login";
                     using (SqlCommand checkCommand = new SqlCommand(checkQuery, connection))
                     {
@@ -163,7 +150,7 @@ namespace Flower_shop
                         command.Parameters.AddWithValue("@phoneNumber", phoneNumber);
                         command.Parameters.AddWithValue("@address", address);
                         command.Parameters.AddWithValue("@login", login);
-                        command.Parameters.AddWithValue("@password", HashPassword(password));
+                        command.Parameters.AddWithValue("@password", password);
 
                         await command.ExecuteNonQueryAsync();
                         MessageBox.Show("Регистрация прошла успешно!",
@@ -179,23 +166,20 @@ namespace Flower_shop
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Ошибка при подключении к базе данных: {ex.Message}\n\nПожалуйста, проверьте подключение к сети и попробуйте снова.",
+                MessageBox.Show($"Ошибка при подключении к базе данных: {ex.Message}",
                               "Ошибка базы данных",
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
-                // TODO: Добавить логирование ошибки
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Произошла непредвиденная ошибка: {ex.Message}\n\nПожалуйста, обратитесь к администратору.",
+                MessageBox.Show($"Произошла непредвиденная ошибка: {ex.Message}",
                               "Системная ошибка",
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
-                // TODO: Добавить логирование ошибки
             }
             finally
             {
-                // Скрываем индикатор загрузки
                 loadingIndicator.Visibility = Visibility.Collapsed;
                 mainContent.IsEnabled = true;
             }

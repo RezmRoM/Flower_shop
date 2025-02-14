@@ -39,7 +39,7 @@
         <DataTemplate x:Key="ProductCardTemplate">
             <Border x:Name="cardBorder" 
                     Width="300" 
-                    Height="450"
+                    Height="570"
                     Background="White"
                     CornerRadius="15"
                     Margin="10"
@@ -76,70 +76,82 @@
                     <Border Grid.Row="0" 
                             Background="#FFF5F5F5"
                             CornerRadius="15,15,0,0">
-                        <Grid>
-                            <Image Source="{Binding Image_Url}"
-                                   Stretch="UniformToFill"
-                                   Height="200"/>
-                            <Button Content="Изменить фото"
+                        <Grid x:Name="imageContainer">
+                            <Border CornerRadius="15,15,0,0" 
+                                    ClipToBounds="True">
+                                <Image Source="{Binding Image_Url}"
+                                       Stretch="UniformToFill"
+                                       RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="15" 
+                                                        ShadowDepth="0"
+                                                        Color="#20000000"/>
+                                    </Image.Effect>
+                                </Image>
+                            </Border>
+
+                            <!-- Затемнение при наведении -->
+                            <Border x:Name="overlay"
+                                    Background="#80000000" 
+                                    CornerRadius="15,15,0,0"
+                                    Opacity="0"/>
+
+                            <!-- Кнопка изменения фото -->
+                            <Button x:Name="changePhotoButton"
+                                    Content="Изменить фото"
                                     Style="{StaticResource ModernButton}"
                                     Width="120"
                                     Height="35"
                                     Margin="10"
-                                    VerticalAlignment="Bottom"
-                                    Click="ChangeImage_Click"
-                                    Opacity="0">
-                                <Button.Triggers>
-                                    <EventTrigger RoutedEvent="Button.MouseEnter">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                               To="1" Duration="0:0:0.2"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                    <EventTrigger RoutedEvent="Button.MouseLeave">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                               To="0" Duration="0:0:0.2"/>
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                </Button.Triggers>
-                            </Button>
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Opacity="0"
+                                    Click="ChangeImage_Click"/>
                         </Grid>
                     </Border>
 
                     <!-- Информация о товаре -->
                     <StackPanel Grid.Row="1" Margin="15,10">
-                        <TextBlock Text="{Binding Product_Name}"
-                                 FontSize="18"
-                                 FontWeight="SemiBold"
-                                 TextWrapping="Wrap"/>
-                        <TextBlock Text="{Binding Description}"
-                                 FontSize="14"
-                                 Foreground="#666666"
-                                 TextWrapping="Wrap"
-                                 Margin="0,5"/>
+                        <TextBox Text="{Binding Product_Name, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource ModernTextBox}"
+                                Height="40"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Margin="0,0,0,5"
+                                LostFocus="NameEditor_LostFocus"/>
+
+                        <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource ModernTextBox}"
+                                Height="60"
+                                FontSize="14"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                VerticalScrollBarVisibility="Auto"
+                                Margin="0,0,0,5"
+                                LostFocus="DescriptionEditor_LostFocus"/>
                     </StackPanel>
 
                     <!-- Категория и поставщик -->
                     <StackPanel Grid.Row="2" Margin="15,0">
                         <StackPanel Orientation="Horizontal" Margin="0,5">
                             <TextBlock Text="Категория: "
-                                     Foreground="#666666"/>
+                                     Foreground="#666666"
+                                     VerticalAlignment="Center"/>
                             <ComboBox ItemsSource="{Binding Categories}"
-                                    SelectedItem="{Binding Category}"
-                                    Width="150"
-                                    Style="{StaticResource ModernComboBox}"/>
+                                    SelectedItem="{Binding Category, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="200"
+                                    Style="{StaticResource ModernComboBox}"
+                                    SelectionChanged="CategoryComboBox_SelectionChanged"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,5">
                             <TextBlock Text="Поставщик: "
-                                     Foreground="#666666"/>
+                                     Foreground="#666666"
+                                     VerticalAlignment="Center"/>
                             <ComboBox ItemsSource="{Binding Suppliers}"
-                                    SelectedItem="{Binding Postavchik}"
-                                    Width="150"
-                                    Style="{StaticResource ModernComboBox}"/>
+                                    SelectedItem="{Binding Postavchik, UpdateSourceTrigger=PropertyChanged}"
+                                    Width="200"
+                                    Style="{StaticResource ModernComboBox}"
+                                    SelectionChanged="SupplierComboBox_SelectionChanged"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -158,16 +170,21 @@
                                         Style="{StaticResource ModernButton}"
                                         Width="30"
                                         Height="30"
-                                        Click="DecrementPrice_Click"/>
-                                <TextBox Text="{Binding Price, StringFormat='{}{0:N2}'}"
+                                        Click="DecrementPrice_Click"
+                                        PreviewMouseLeftButtonDown="DecrementPrice_PreviewMouseLeftButtonDown"
+                                        PreviewMouseLeftButtonUp="DecrementPrice_PreviewMouseLeftButtonUp"/>
+                                <TextBox Text="{Binding Price, StringFormat='{}{0:N2}', UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource ModernTextBox}"
                                          Width="80"
-                                         Margin="5,0"/>
+                                         Margin="5,0"
+                                         LostFocus="Price_LostFocus"/>
                                 <Button Content="+"
                                         Style="{StaticResource ModernButton}"
                                         Width="30"
                                         Height="30"
-                                        Click="IncrementPrice_Click"/>
+                                        Click="IncrementPrice_Click"
+                                        PreviewMouseLeftButtonDown="IncrementPrice_PreviewMouseLeftButtonDown"
+                                        PreviewMouseLeftButtonUp="IncrementPrice_PreviewMouseLeftButtonUp"/>
                             </StackPanel>
 
                             <TextBlock Text="Количество:"
@@ -178,16 +195,21 @@
                                         Style="{StaticResource ModernButton}"
                                         Width="30"
                                         Height="30"
-                                        Click="DecrementQuantity_Click"/>
-                                <TextBox Text="{Binding Quantity}"
+                                        Click="DecrementQuantity_Click"
+                                        PreviewMouseLeftButtonDown="DecrementQuantity_PreviewMouseLeftButtonDown"
+                                        PreviewMouseLeftButtonUp="DecrementQuantity_PreviewMouseLeftButtonUp"/>
+                                <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource ModernTextBox}"
                                          Width="80"
-                                         Margin="5,0"/>
+                                         Margin="5,0"
+                                         LostFocus="Quantity_LostFocus"/>
                                 <Button Content="+"
                                         Style="{StaticResource ModernButton}"
                                         Width="30"
                                         Height="30"
-                                        Click="IncrementQuantity_Click"/>
+                                        Click="IncrementQuantity_Click"
+                                        PreviewMouseLeftButtonDown="IncrementQuantity_PreviewMouseLeftButtonDown"
+                                        PreviewMouseLeftButtonUp="IncrementQuantity_PreviewMouseLeftButtonUp"/>
                             </StackPanel>
                         </StackPanel>
 
@@ -217,19 +239,21 @@
         <!-- Шаблон карточки добавления -->
         <DataTemplate x:Key="AddCardTemplate">
             <Border Width="300" 
-                    Height="450"
+                    Height="570"
                     Background="Transparent"
                     CornerRadius="15"
                     Margin="10"
-                    BorderThickness="2"
-                    BorderBrush="#FFB6C1"
                     Style="{StaticResource DashedBorderStyle}">
-                <Button Content="+"
-                        Style="{StaticResource ModernButton}"
-                        Width="60"
-                        Height="60"
-                        FontSize="30"
-                        Click="AddProduct_Click"/>
+                <Grid>
+                    <Rectangle Style="{StaticResource DashedBorderLine}"
+                              Margin="1"/>
+                    <Button Content="+"
+                            Style="{StaticResource ModernButton}"
+                            Width="60"
+                            Height="60"
+                            FontSize="30"
+                            Click="AddProduct_Click"/>
+                </Grid>
             </Border>
         </DataTemplate>
 
@@ -456,17 +480,212 @@
                       Margin="0,20,0,20"/>
 
             <!-- Список товаров -->
-            <ScrollViewer Grid.Row="2" 
-                         Margin="20"
-                         VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="ProductsItemsControl">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </ScrollViewer>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Grid.Row="0"
+                             Margin="20"
+                             VerticalScrollBarVisibility="Hidden">
+                    <ItemsControl x:Name="ProductsItemsControl">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border x:Name="cardBorder" 
+                                        Width="300" 
+                                        Height="570"
+                                        Background="White"
+                                        CornerRadius="15"
+                                        Margin="10"
+                                        BorderThickness="1"
+                                        BorderBrush="#FFE4E4E4">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                        ShadowDepth="0"
+                                                        Color="#FFB6C1"/>
+                                    </Border.Effect>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="200"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- Изображение товара -->
+                                        <Border Grid.Row="0" 
+                                                Background="#FFF5F5F5"
+                                                CornerRadius="15,15,0,0">
+                                            <Grid x:Name="imageContainer">
+                                                <Border CornerRadius="15,15,0,0" 
+                                                        ClipToBounds="True">
+                                                    <Image Source="{Binding Image_Url}"
+                                                           Stretch="UniformToFill"
+                                                           RenderOptions.BitmapScalingMode="HighQuality">
+                                                        <Image.Effect>
+                                                            <DropShadowEffect BlurRadius="15" 
+                                                                            ShadowDepth="0"
+                                                                            Color="#20000000"/>
+                                                        </Image.Effect>
+                                                    </Image>
+                                                </Border>
+
+                                                <!-- Затемнение при наведении -->
+                                                <Border x:Name="overlay"
+                                                        Background="#80000000" 
+                                                        CornerRadius="15,15,0,0"
+                                                        Opacity="0"/>
+
+                                                <!-- Кнопка изменения фото -->
+                                                <Button x:Name="changePhotoButton"
+                                                        Content="Изменить фото"
+                                                        Style="{StaticResource ModernButton}"
+                                                        Width="120"
+                                                        Height="35"
+                                                        Margin="10"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Center"
+                                                        Opacity="0"
+                                                        Click="ChangeImage_Click"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Информация о товаре -->
+                                        <StackPanel Grid.Row="1" Margin="15,10">
+                                            <TextBox Text="{Binding Product_Name, UpdateSourceTrigger=PropertyChanged}"
+                                                    Style="{StaticResource ModernTextBox}"
+                                                    Height="40"
+                                                    FontSize="18"
+                                                    FontWeight="SemiBold"
+                                                    Margin="0,0,0,5"
+                                                    LostFocus="NameEditor_LostFocus"/>
+
+                                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"
+                                                    Style="{StaticResource ModernTextBox}"
+                                                    Height="60"
+                                                    FontSize="14"
+                                                    TextWrapping="Wrap"
+                                                    AcceptsReturn="True"
+                                                    VerticalScrollBarVisibility="Auto"
+                                                    Margin="0,0,0,5"
+                                                    LostFocus="DescriptionEditor_LostFocus"/>
+                                        </StackPanel>
+
+                                        <!-- Категория и поставщик -->
+                                        <StackPanel Grid.Row="2" Margin="15,0">
+                                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                                <TextBlock Text="Категория: "
+                                                         Foreground="#666666"
+                                                         VerticalAlignment="Center"/>
+                                                <ComboBox ItemsSource="{Binding Categories}"
+                                                        SelectedItem="{Binding Category, UpdateSourceTrigger=PropertyChanged}"
+                                                        Width="200"
+                                                        Style="{StaticResource ModernComboBox}"
+                                                        SelectionChanged="CategoryComboBox_SelectionChanged"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5">
+                                                <TextBlock Text="Поставщик: "
+                                                         Foreground="#666666"
+                                                         VerticalAlignment="Center"/>
+                                                <ComboBox ItemsSource="{Binding Suppliers}"
+                                                        SelectedItem="{Binding Postavchik, UpdateSourceTrigger=PropertyChanged}"
+                                                        Width="200"
+                                                        Style="{StaticResource ModernComboBox}"
+                                                        SelectionChanged="SupplierComboBox_SelectionChanged"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Цена и количество -->
+                                        <Grid Grid.Row="3" Margin="15,10,15,15">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="Цена:"
+                                                         Foreground="#666666"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="-"
+                                                            Style="{StaticResource ModernButton}"
+                                                            Width="30"
+                                                            Height="30"
+                                                            Click="DecrementPrice_Click"
+                                                            PreviewMouseLeftButtonDown="DecrementPrice_PreviewMouseLeftButtonDown"
+                                                            PreviewMouseLeftButtonUp="DecrementPrice_PreviewMouseLeftButtonUp"/>
+                                                    <TextBox Text="{Binding Price, StringFormat='{}{0:N2}', UpdateSourceTrigger=PropertyChanged}"
+                                                             Style="{StaticResource ModernTextBox}"
+                                                             Width="80"
+                                                             Margin="5,0"
+                                                             LostFocus="Price_LostFocus"/>
+                                                    <Button Content="+"
+                                                            Style="{StaticResource ModernButton}"
+                                                            Width="30"
+                                                            Height="30"
+                                                            Click="IncrementPrice_Click"
+                                                            PreviewMouseLeftButtonDown="IncrementPrice_PreviewMouseLeftButtonDown"
+                                                            PreviewMouseLeftButtonUp="IncrementPrice_PreviewMouseLeftButtonUp"/>
+                                                </StackPanel>
+
+                                                <TextBlock Text="Количество:"
+                                                         Foreground="#666666"
+                                                         Margin="0,5,0,0"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Button Content="-"
+                                                            Style="{StaticResource ModernButton}"
+                                                            Width="30"
+                                                            Height="30"
+                                                            Click="DecrementQuantity_Click"
+                                                            PreviewMouseLeftButtonDown="DecrementQuantity_PreviewMouseLeftButtonDown"
+                                                            PreviewMouseLeftButtonUp="DecrementQuantity_PreviewMouseLeftButtonUp"/>
+                                                    <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                             Style="{StaticResource ModernTextBox}"
+                                                             Width="80"
+                                                             Margin="5,0"
+                                                             LostFocus="Quantity_LostFocus"/>
+                                                    <Button Content="+"
+                                                            Style="{StaticResource ModernButton}"
+                                                            Width="30"
+                                                            Height="30"
+                                                            Click="IncrementQuantity_Click"
+                                                            PreviewMouseLeftButtonDown="IncrementQuantity_PreviewMouseLeftButtonDown"
+                                                            PreviewMouseLeftButtonUp="IncrementQuantity_PreviewMouseLeftButtonUp"/>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <Button Grid.Column="1"
+                                                    Content="Удалить"
+                                                    Style="{StaticResource ModernButton}"
+                                                    Width="100"
+                                                    Height="35"
+                                                    Margin="10,0,0,0"
+                                                    Click="DeleteProduct_Click"/>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- Кнопка добавления нового товара -->
+                <Button Grid.Row="1"
+                        Content="+"
+                        Style="{StaticResource ModernButton}"
+                        Width="60"
+                        Height="60"
+                        FontSize="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="20"
+                        Click="AddProduct_Click"/>
+            </Grid>
         </Grid>
     </Border>
 
