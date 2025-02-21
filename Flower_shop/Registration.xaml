@@ -16,6 +16,16 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.Resources>
+        <!-- Цвета -->
+        <Color x:Key="PrimaryColor">#FFB6C1</Color>
+        <Color x:Key="SecondaryColor">#FF8C4B77</Color>
+
+        <!-- Градиенты -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="{StaticResource PrimaryColor}" Offset="0"/>
+            <GradientStop Color="{StaticResource SecondaryColor}" Offset="1"/>
+        </LinearGradientBrush>
+
         <!-- Анимации -->
         <Storyboard x:Key="TextBoxFocus">
             <DoubleAnimation Storyboard.TargetProperty="Width"
@@ -162,15 +172,83 @@
 
                 <!-- Верхняя панель с кнопками управления окном -->
                 <Grid Grid.Row="0">
-                    <StackPanel Orientation="Horizontal" 
-                              HorizontalAlignment="Right" 
-                              Margin="0,0,5,0">
-                        <Button Style="{StaticResource WindowButtonStyle}"
-                                Content="—"
-                                Click="MinimizeButton_Click"/>
-                        <Button Style="{StaticResource WindowButtonStyle}"
-                                Content="✕"
-                                Click="CloseButton_Click"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Логотип -->
+                    <TextBlock Text="Flower Shop"
+                             FontSize="16"
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource HeaderGradient}"
+                             Margin="15,0,0,0"
+                             VerticalAlignment="Center">
+                    </TextBlock>
+
+                    <!-- Кнопка назад -->
+                    <Button Grid.Column="1"
+                            Style="{StaticResource WindowButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Click="CloseButton_Click" Width="60">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="←" 
+                                     FontSize="16" 
+                                     Margin="0,0,5,0"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock Text="Назад"
+                                     FontSize="14"
+                                     VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                            To="-5" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                            To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                        <Button.RenderTransform>
+                            <TranslateTransform/>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <!-- Кнопки управления окном -->
+                    <!-- Кнопки управления окном -->
+                    <StackPanel Grid.Column="2"
+                      Orientation="Horizontal" 
+                      Margin="0,0,5,0">
+                                    <Button Style="{StaticResource WindowButtonStyle}"
+                        Content="—"
+                        Click="MinimizeButton_Click"/>
+                                    <Button Style="{StaticResource WindowButtonStyle}"
+                        Content="☐"
+                        Click="MaximizeButton_Click"/>
+                                    <Button Style="{StaticResource WindowButtonStyle}"
+                        Content="✕"
+                        Click="CloseButton_Click"/>
                     </StackPanel>
                 </Grid>
 

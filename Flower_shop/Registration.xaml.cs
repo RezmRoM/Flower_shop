@@ -41,6 +41,14 @@ namespace Flower_shop
             this.WindowState = WindowState.Minimized;
         }
 
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
+                this.WindowState = WindowState.Normal;
+            else
+                this.WindowState = WindowState.Maximized;
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Вы уверены, что хотите вернуться к окну авторизации?",

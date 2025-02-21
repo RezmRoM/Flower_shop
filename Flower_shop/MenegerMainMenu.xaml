@@ -5,19 +5,840 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MenuManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="zakazDataGrid" HorizontalAlignment="Left" Height="198" VerticalAlignment="Top" Width="792"/>
-        <Button x:Name="oformBox1" Content="Оформить заказ" HorizontalAlignment="Left" Margin="178,317,0,0" VerticalAlignment="Top" Width="131" Click="OformBox_Click"/>
-        <Button x:Name="deleteBox1" Content="Удалить заказ" HorizontalAlignment="Left" Margin="336,317,0,0" VerticalAlignment="Top" Width="131" Click="DeleteBox_Click"/>
-        <ComboBox x:Name="clientCombo" HorizontalAlignment="Left" Margin="106,223,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="tovarCombo" HorizontalAlignment="Left" Margin="106,264,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Клиент:" HorizontalAlignment="Left" Margin="50,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.465,0.24"/>
-        <Label Content="Товар:" HorizontalAlignment="Left" Margin="50,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.465,0.24"/>
-        <TextBox x:Name="colvoBox" HorizontalAlignment="Left" Height="23" Margin="383,223,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="ColvoBox_TextChanged"/>
-        <TextBox x:Name="priceBox" HorizontalAlignment="Left" Height="23" Margin="383,263,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Количество:" HorizontalAlignment="Left" Margin="301,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.465,0.24"/>
-        <Label Content="Цена:" HorizontalAlignment="Left" Margin="332,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.465,0.24"/>
+        Title="Flower Shop - Панель менеджера" 
+        Height="800" 
+        Width="1400"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Background="Transparent"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
+    <Window.Resources>
+        <!-- Цвета -->
+        <Color x:Key="PrimaryColor">#FFB6C1</Color>
+        <Color x:Key="SecondaryColor">#FF8C4B77</Color>
+
+        <!-- Градиенты -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="{StaticResource PrimaryColor}" Offset="0"/>
+            <GradientStop Color="{StaticResource SecondaryColor}" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Анимации для формы -->
+        <Storyboard x:Key="ShowFormAnimation">
+            <DoubleAnimation 
+                Storyboard.TargetProperty="Opacity"
+                From="0" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                From="0.8" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                From="0.8" To="1" Duration="0:0:0.3">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut" Amplitude="0.5"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="HideFormAnimation">
+            <DoubleAnimation 
+                Storyboard.TargetProperty="Opacity"
+                From="1" To="0" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                From="1" To="0.8" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                From="1" To="0.8" Duration="0:0:0.2">
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseIn"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <!-- Стиль для кнопок окна -->
+        <Style x:Key="WindowButtonStyle" TargetType="Button">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#FF8C4B77"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#20FF8C4B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для ModernTextBox -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="10"
+                                BorderThickness="1"
+                                BorderBrush="#FFB6C1">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF8C4B77"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                          ShadowDepth="0" 
+                                                          Color="#FFB6C1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль для ModernComboBox -->
+        <Style x:Key="ModernComboBox" TargetType="ComboBox">
+            <Setter Property="Background" Value="#FFF5F5F5"/>
+            <Setter Property="BorderBrush" Value="#FFB6C1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          Background="{TemplateBinding Background}"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Focusable="false">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="ToggleBorder"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="10">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="30"/>
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter Grid.Column="0"
+                                                                  x:Name="ContentSite"
+                                                                  Content="{TemplateBinding Content}"
+                                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                                  Margin="10,3,30,3"
+                                                                  VerticalAlignment="Center"/>
+                                                <Path Grid.Column="1"
+                                                      x:Name="Arrow"
+                                                      Fill="#FF8C4B77"
+                                                      Data="M0,0 L8,8 L16,0"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ToggleBorder" Property="BorderBrush" Value="#FF8C4B77"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Arrow" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180" CenterX="8" CenterY="4"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"/>
+                            <Popup x:Name="PART_Popup"
+                                   Placement="Bottom"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   PopupAnimation="Slide">
+                                <Grid x:Name="DropDown"
+                                      SnapsToDevicePixels="True"
+                                      MinWidth="{TemplateBinding ActualWidth}"
+                                      MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder"
+                                            Background="White"
+                                            BorderBrush="#FFB6C1"
+                                            BorderThickness="1"
+                                            CornerRadius="0,0,10,10">
+                                        <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+                                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained"/>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Анимации -->
+        <Storyboard x:Key="CardHover">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                            To="20" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                            To="1.02" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                            To="1.02" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <Storyboard x:Key="CardUnhover">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                            To="10" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                            To="1" Duration="0:0:0.2"/>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                            To="1" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <!-- Базовый стиль для DataGrid -->
+        <Style x:Key="ModernDataGrid" TargetType="DataGrid">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FFB6C1"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#FFF5F5F5"/>
+            <Setter Property="AlternatingRowBackground" Value="White"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#FFE4E4E4"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#FFE4E4E4"/>
+            <Setter Property="RowHeight" Value="40"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="ColumnHeaderHeight" Value="40"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="CanUserDeleteRows" Value="False"/>
+            <Setter Property="CanUserReorderColumns" Value="False"/>
+            <Setter Property="CanUserResizeRows" Value="False"/>
+            <Setter Property="CanUserSortColumns" Value="True"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGrid}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="1">
+                            <ScrollViewer Focusable="false">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#FFB6C1"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+                    <Setter Property="Padding" Value="10,0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="DataGridColumnHeader">
+                                <Grid>
+                                    <Border x:Name="HeaderBorder"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="#FFE4E4E4"
+                                            BorderThickness="0,0,1,1">
+                                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                          Margin="{TemplateBinding Padding}"/>
+                                    </Border>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Margin" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#15FFB6C1"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#30FFB6C1"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="10,0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}">
+                                    <ContentPresenter VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!-- Стиль для DataGrid заказов -->
+        <Style x:Key="OrderDataGrid" TargetType="DataGrid" BasedOn="{StaticResource ModernDataGrid}">
+            <Setter Property="Margin" Value="20"/>
+        </Style>
+
+        <!-- Шаблон карточки заказа -->
+        <DataTemplate x:Key="OrderCardTemplate">
+            <Border x:Name="cardBorder" 
+                    Width="300" 
+                    Height="350"
+                    Background="White"
+                    CornerRadius="15"
+                    Margin="10"
+                    BorderThickness="1"
+                    BorderBrush="#FFE4E4E4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" 
+                                    ShadowDepth="0"
+                                    Color="#FFB6C1"/>
+                </Border.Effect>
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                        <BeginStoryboard Storyboard="{StaticResource CardHover}"/>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                        <BeginStoryboard Storyboard="{StaticResource CardUnhover}"/>
+                    </EventTrigger>
+                </Border.Triggers>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Заголовок карточки -->
+                    <Border Grid.Row="0" 
+                            Background="#FFB6C1"
+                            CornerRadius="15,15,0,0">
+                        <Grid Margin="15,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Order_Date, StringFormat='dd.MM.yyyy HH:mm'}"
+                                     Foreground="White"
+                                     FontSize="16"
+                                     FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" 
+                                     Text="{Binding ID_Zakaz, StringFormat='№{0}'}"
+                                     Foreground="White"
+                                     FontSize="16"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Содержимое карточки -->
+                    <StackPanel Grid.Row="1" Margin="15,10">
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Клиент: "
+                                     Foreground="#666666"/>
+                            <TextBlock Text="{Binding First_Name}"
+                                     Foreground="#FF8C4B77"
+                                     FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Товар: "
+                                     Foreground="#666666"/>
+                            <TextBlock Text="{Binding Product_Name}"
+                                     Foreground="#FF8C4B77"
+                                     FontWeight="SemiBold"
+                                     TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <TextBlock Text="Количество: "
+                                     Foreground="#666666"/>
+                            <TextBlock Text="{Binding Kolichestvo}"
+                                     Foreground="#FF8C4B77"
+                                     FontWeight="SemiBold"/>
+                            <TextBlock Text=" шт."
+                                     Foreground="#666666"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10">
+                            <TextBlock Text="Сумма: "
+                                     Foreground="#666666"/>
+                            <TextBlock Text="{Binding Price_Zakaza, StringFormat='{}{0:N2} ₽'}"
+                                     Foreground="#FF8C4B77"
+                                     FontSize="18"
+                                     FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Кнопка отмены заказа -->
+                    <Button Grid.Row="2"
+                            Content="Отменить заказ"
+                            Style="{StaticResource ModernButton}"
+                            Width="200"
+                            Height="40"
+                            Margin="15"
+                            Click="DeleteBox_Click"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Стиль TextBox с плейсхолдером -->
+        <Style x:Key="TextBoxWithPlaceholder" TargetType="{x:Type TextBox}" BasedOn="{StaticResource ModernTextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <TextBox x:Name="textSource"
+                                    Text="{Binding Path=Text,
+                                                 RelativeSource={RelativeSource TemplatedParent},
+                                                 UpdateSourceTrigger=PropertyChanged}"
+                                    Background="{TemplateBinding Background}"
+                                    Panel.ZIndex="2"
+                                    Style="{StaticResource ModernTextBox}"/>
+                            <TextBlock x:Name="placeholder" 
+                                      Text="Поиск по заказам..."
+                                      Foreground="#99000000"
+                                      Margin="10,0,0,0"
+                                      VerticalAlignment="Center"
+                                      Visibility="Collapsed"
+                                      Panel.ZIndex="1">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=textSource}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Добавляем эффект размытия для фона при открытии формы -->
+        <Grid.Effect>
+            <BlurEffect x:Name="mainBlurEffect" Radius="0"/>
+        </Grid.Effect>
+
+        <Border Background="White" 
+                CornerRadius="20" 
+                Margin="10"
+                x:Name="mainBorder"
+                Opacity="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Верхняя панель с кнопками управления окном -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Логотип -->
+                    <TextBlock Text="Flower Shop"
+                             FontSize="16"
+                             FontWeight="SemiBold"
+                             Foreground="{StaticResource HeaderGradient}"
+                             Margin="15,0,0,0"
+                             VerticalAlignment="Center">
+                    </TextBlock>
+
+                    <!-- Кнопка назад -->
+                    <Button Grid.Column="1"
+                            Style="{StaticResource WindowButtonStyle}"
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,0"
+                            Click="CloseButton_Click" 
+                            Width="60">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="←" 
+                                     FontSize="16" 
+                                     Margin="0,0,5,0"
+                                     VerticalAlignment="Center"/>
+                            <TextBlock Text="Назад"
+                                     FontSize="14"
+                                     VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                            To="-5" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                            To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                        <Button.RenderTransform>
+                            <TranslateTransform/>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <!-- Кнопки управления окном -->
+                    <StackPanel Grid.Column="2"
+                              Orientation="Horizontal" 
+                              Margin="0,0,5,0">
+                        <Button Style="{StaticResource WindowButtonStyle}"
+                                Content="—"
+                                Click="MinimizeButton_Click"/>
+                        <Button Style="{StaticResource WindowButtonStyle}"
+                                Content="☐"
+                                Click="MaximizeButton_Click"/>
+                        <Button Style="{StaticResource WindowButtonStyle}"
+                                Content="✕"
+                                Click="CloseButton_Click"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Заголовок с декоративным подчеркиванием -->
+                <StackPanel Grid.Row="1" 
+                          Margin="0,20,0,20">
+                    <TextBlock Text="Управление заказами"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#FF8C4B77"
+                             HorizontalAlignment="Center"/>
+                    <Border Height="2" 
+                            Width="100"
+                            Background="{StaticResource HeaderGradient}"
+                            Margin="0,10,0,0"
+                            CornerRadius="1"/>
+                </StackPanel>
+
+                <!-- Список заказов с поиском -->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Поисковая строка -->
+                    <Border Background="#FFF5F5F5"
+                            CornerRadius="25"
+                            Margin="20,0,20,20"
+                            Height="50">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="🔍"
+                                     FontSize="20"
+                                     Margin="20,0,10,0"
+                                     VerticalAlignment="Center"/>
+                            <TextBox x:Name="searchBox"
+                                   Grid.Column="1"
+                                   Style="{StaticResource TextBoxWithPlaceholder}"
+                                   Background="Transparent"
+                                   BorderThickness="0"
+                                   Height="40"
+                                   Margin="0,0,20,0"
+                                   VerticalAlignment="Center"
+                                   TextChanged="SearchBox_TextChanged"/>
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer Grid.Row="1"
+                                 VerticalScrollBarVisibility="Auto"
+                                 HorizontalScrollBarVisibility="Disabled">
+                        <ItemsControl x:Name="ordersItemsControl"
+                                    ItemTemplate="{StaticResource OrderCardTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </ScrollViewer>
+
+                    <!-- Кнопка добавления нового заказа -->
+                    <Button Content="+"
+                            Style="{StaticResource ModernButton}"
+                            Width="60"
+                            Height="60"
+                            FontSize="30"
+                            FontWeight="Bold"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Margin="20"
+                            Click="ShowOrderForm_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <RotateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="Button.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                            To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                            To="1.1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(RotateTransform.Angle)"
+                                            To="90" Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Button.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                            To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                            To="1" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation 
+                                            Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(RotateTransform.Angle)"
+                                            To="0" Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CircleEase EasingMode="EaseIn"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+                    </Button>
+
+                    <!-- Индикатор загрузки -->
+                    <Grid x:Name="loadingIndicator" 
+                          Visibility="Collapsed"
+                          Background="#80000000">
+                        <StackPanel HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center">
+                            <TextBlock Text="Загрузка..."
+                                     Foreground="White"
+                                     FontSize="18"
+                                     Margin="0,0,0,10"/>
+                            <ProgressBar Width="200" 
+                                       Height="4" 
+                                       IsIndeterminate="True"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Форма оформления заказа -->
+        <Border x:Name="orderFormPopup"
+                Background="#80000000"
+                Visibility="Collapsed"
+                Panel.ZIndex="1000">
+            <Border Background="White"
+                    CornerRadius="20"
+                    Width="600"
+                    VerticalAlignment="Center"
+                    Margin="20">
+                <Border.RenderTransform>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Border.RenderTransform>
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="20" 
+                                    ShadowDepth="0"
+                                    Color="#40000000"/>
+                </Border.Effect>
+
+                <Grid Margin="30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Оформление заказа"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#FF8C4B77"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,20"/>
+
+                    <StackPanel Grid.Row="1" Margin="0,10">
+                        <TextBlock Text="Клиент:"
+                                 Foreground="#666666"
+                                 Margin="0,0,0,5"/>
+                        <ComboBox x:Name="clientCombo"
+                                Style="{StaticResource ModernComboBox}"
+                                Height="40"
+                                Margin="0,0,0,15"/>
+
+                        <TextBlock Text="Товар:"
+                                 Foreground="#666666"
+                                 Margin="0,0,0,5"/>
+                        <ComboBox x:Name="tovarCombo"
+                                Style="{StaticResource ModernComboBox}"
+                                Height="40"
+                                Margin="0,0,0,15"/>
+
+                        <TextBlock Text="Количество:"
+                                 Foreground="#666666"
+                                 Margin="0,0,0,5"/>
+                        <TextBox x:Name="colvoBox"
+                                Style="{StaticResource ModernTextBox}"
+                                Height="40"
+                                Margin="0,0,0,15"
+                                TextChanged="ColvoBox_TextChanged"/>
+
+                        <TextBlock Text="Итоговая сумма:"
+                                 Foreground="#666666"
+                                 Margin="0,0,0,5"/>
+                        <TextBox x:Name="priceBox"
+                                Style="{StaticResource ModernTextBox}"
+                                Height="40"
+                                IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,20,0,0">
+                        <Button Content="Оформить"
+                                Style="{StaticResource ModernButton}"
+                                Width="150"
+                                Height="40"
+                                Margin="0,0,10,0"
+                                Click="OformBox_Click"/>
+                        <Button Content="Отмена"
+                                Style="{StaticResource ModernButton}"
+                                Width="150"
+                                Height="40"
+                                Click="HideOrderForm_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Grid.Triggers>
+            <EventTrigger RoutedEvent="Grid.Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="mainBorder"
+                                       Storyboard.TargetProperty="Opacity"
+                                       From="0" To="1" Duration="0:0:0.5">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut"/>
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Grid.Triggers>
     </Grid>
 </Window>

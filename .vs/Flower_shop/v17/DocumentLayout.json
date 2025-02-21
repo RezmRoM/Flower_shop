@@ -3,27 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|c:\\users\\roma_w\\desktop\\3\\news\\flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\menegermainmenu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\menegermainmenu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainmenucustomer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|c:\\users\\roma_w\\desktop\\3\\news\\flower_shop\\mainmenucustomer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenucustomer.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -31,8 +11,36 @@
       "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenucustomer.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\menegermainmenu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\menegermainmenu.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\menegermainmenu.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\menegermainmenu.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainmenuadmin.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\addproductdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -59,14 +67,6 @@
       "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\inputdialog.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\registration.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|C:\\Users\\ROMA_W\\Desktop\\3\\news\\flower_shop\\inputdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{60EAFB07-A5C1-4D5B-AB01-8A59E44FE581}|Flower_shop\\Flower_shop.csproj|solutionrelative:flower_shop\\inputdialog.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
@@ -78,53 +78,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainMenuAdmin.xaml",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml",
-              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml",
-              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T18:35:35.911Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "MainMenuCustomer.xaml",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml",
-              "RelativeDocumentMoniker": "Flower_shop\\MainMenuCustomer.xaml",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml",
-              "RelativeToolTip": "Flower_shop\\MainMenuCustomer.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T18:35:20.727Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainMenuAdmin.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml.cs",
-              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml.cs",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml.cs",
-              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml.cs",
-              "ViewState": "AgIAAKcBAAAAAAAAAAAAwLsCAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T19:15:28.518Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml",
-              "RelativeToolTip": "Flower_shop\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T18:20:23.788Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 2,
@@ -139,31 +94,111 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml.cs",
-              "RelativeToolTip": "Flower_shop\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAmwGEAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T18:20:21.783Z",
+              "Title": "MainMenuCustomer.xaml",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuCustomer.xaml",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml",
+              "RelativeToolTip": "Flower_shop\\MainMenuCustomer.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:35:20.727Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml",
+              "RelativeToolTip": "Flower_shop\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:20:23.788Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Registration.xaml",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml",
+              "RelativeToolTip": "Flower_shop\\Registration.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:26:39.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Registration.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml.cs",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\Registration.xaml.cs",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAAMQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T19:05:16.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainMenuCustomer.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml.cs",
               "RelativeDocumentMoniker": "Flower_shop\\MainMenuCustomer.xaml.cs",
               "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuCustomer.xaml.cs",
               "RelativeToolTip": "Flower_shop\\MainMenuCustomer.xaml.cs",
-              "ViewState": "AgIAAIkAAAAAAAAAAAAuwKQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAI8AAAAAAAAAAAAiwKQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T16:47:29.176Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 6,
+              "Title": "MainMenuAdmin.xaml",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml",
+              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-10T18:35:35.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MenegerMainMenu.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MenegerMainMenu.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\MenegerMainMenu.xaml.cs",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MenegerMainMenu.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\MenegerMainMenu.xaml.cs",
+              "ViewState": "AgIAAFoCAAAAAAAAAAA6wGwCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-11T16:21:29.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainWindow.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T18:20:21.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MainMenuAdmin.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml.cs",
+              "RelativeDocumentMoniker": "Flower_shop\\MainMenuAdmin.xaml.cs",
+              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MainMenuAdmin.xaml.cs",
+              "RelativeToolTip": "Flower_shop\\MainMenuAdmin.xaml.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA9wB8AAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-10T19:15:28.518Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "InputDialog.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\InputDialog.xaml.cs",
               "RelativeDocumentMoniker": "Flower_shop\\InputDialog.xaml.cs",
@@ -175,18 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Registration.xaml",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml",
-              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml",
-              "RelativeToolTip": "Flower_shop\\Registration.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T18:26:39.465Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "AddProductDialog.xaml",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\AddProductDialog.xaml",
               "RelativeDocumentMoniker": "Flower_shop\\AddProductDialog.xaml",
@@ -197,30 +221,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "MenegerMainMenu.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MenegerMainMenu.xaml.cs",
-              "RelativeDocumentMoniker": "Flower_shop\\MenegerMainMenu.xaml.cs",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\MenegerMainMenu.xaml.cs",
-              "RelativeToolTip": "Flower_shop\\MenegerMainMenu.xaml.cs",
-              "ViewState": "AgIAALYAAAAAAAAAAAAAwN0AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T16:21:29.86Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "Styles.xaml",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Styles.xaml",
               "RelativeDocumentMoniker": "Flower_shop\\Styles.xaml",
               "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Styles.xaml",
               "RelativeToolTip": "Flower_shop\\Styles.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T22:03:22.641Z"
+              "WhenOpened": "2025-02-10T22:03:22.641Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "AddProductDialog.xaml.cs",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\AddProductDialog.xaml.cs",
               "RelativeDocumentMoniker": "Flower_shop\\AddProductDialog.xaml.cs",
@@ -232,18 +245,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "App.xaml",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\App.xaml",
               "RelativeDocumentMoniker": "Flower_shop\\App.xaml",
               "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\App.xaml",
               "RelativeToolTip": "Flower_shop\\App.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-02-10T22:02:54.817Z"
+              "WhenOpened": "2025-02-10T22:02:54.817Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\App.config",
               "RelativeDocumentMoniker": "Flower_shop\\App.config",
@@ -263,18 +277,6 @@
               "RelativeToolTip": "Flower_shop\\InputDialog.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-02-10T22:02:55.959Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Registration.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml.cs",
-              "RelativeDocumentMoniker": "Flower_shop\\Registration.xaml.cs",
-              "ToolTip": "C:\\Users\\ROMA_W\\Desktop\\3\\news\\Flower_shop\\Registration.xaml.cs",
-              "RelativeToolTip": "Flower_shop\\Registration.xaml.cs",
-              "ViewState": "AgIAAK0AAAAAAAAAAAAowLwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T19:05:16.189Z"
             }
           ]
         }

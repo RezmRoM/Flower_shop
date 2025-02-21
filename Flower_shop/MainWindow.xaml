@@ -16,6 +16,16 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.Resources>
+        <!-- Цвета -->
+        <Color x:Key="PrimaryColor">#FFB6C1</Color>
+        <Color x:Key="SecondaryColor">#FF8C4B77</Color>
+
+        <!-- Градиенты -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="{StaticResource PrimaryColor}" Offset="0"/>
+            <GradientStop Color="{StaticResource SecondaryColor}" Offset="1"/>
+        </LinearGradientBrush>
+
         <Style x:Key="ModernButton" TargetType="Button">
             <Setter Property="Background" Value="#FFB6C1"/>
             <Setter Property="Foreground" Value="White"/>
@@ -110,8 +120,24 @@
 
                     <!-- Верхняя панель с кнопками управления окном -->
                     <Grid Grid.Row="0">
-                        <StackPanel Orientation="Horizontal" 
-                                  HorizontalAlignment="Right" 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Логотип -->
+                        <TextBlock Text="Flower Shop"
+                                 FontSize="16"
+                                 FontWeight="SemiBold"
+                                 Foreground="{StaticResource HeaderGradient}"
+                                 Margin="15,0,0,0"
+                                 VerticalAlignment="Center">
+                        </TextBlock>
+
+                        <!-- Кнопки управления окном -->
+                        <StackPanel Grid.Column="2"
+                                  Orientation="Horizontal" 
                                   Margin="0,0,5,0">
                             <Button Style="{StaticResource WindowButtonStyle}"
                                     Content="—"

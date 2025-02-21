@@ -16,72 +16,196 @@
         MouseLeftButtonDown="Window_MouseLeftButtonDown">
 
     <Window.Resources>
+        <!-- Цвета -->
+        <Color x:Key="PrimaryColor">#FFB6C1</Color>
+        <Color x:Key="SecondaryColor">#FF8C4B77</Color>
+
+        <!-- Градиенты -->
+        <LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="{StaticResource PrimaryColor}" Offset="0"/>
+            <GradientStop Color="{StaticResource SecondaryColor}" Offset="1"/>
+        </LinearGradientBrush>
+
         <!-- Конвертеры -->
         <local:QuantityToButtonTextConverter x:Key="QuantityToButtonTextConverter"/>
         <local:QuantityToEnabledConverter x:Key="QuantityToEnabledConverter"/>
 
         <!-- Стиль кнопки для товара -->
         <Style x:Key="ProductButtonStyle" TargetType="Button" BasedOn="{StaticResource ModernButton}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Quantity}" Value="0">
-                    <Setter Property="Background" Value="#FFCCCCCC"/>
-                    <Setter Property="IsEnabled" Value="False"/>
-                    <Setter Property="Content" Value="Скоро"/>
-                </DataTrigger>
-            </Style.Triggers>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="22.5"
+                                BorderThickness="0">
+                            <Grid>
+                                <ContentPresenter x:Name="contentPresenter"
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF8C4B77"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect BlurRadius="10" 
+                                                        ShadowDepth="0" 
+                                                        Color="#FFB6C1"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#FF6B3957"/>
+                                <Setter TargetName="contentPresenter" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Quantity}" Value="0">
+                                <Setter Property="Background" Value="#FFCCCCCC"/>
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Content" Value="Скоро в наличии"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
-        <!-- Анимации -->
-        <Storyboard x:Key="CardHover">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
-                            To="20" Duration="0:0:0.2"/>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                            To="1.02" Duration="0:0:0.2"/>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                            To="1.02" Duration="0:0:0.2"/>
-        </Storyboard>
-
-        <Storyboard x:Key="CardUnhover">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
-                            To="10" Duration="0:0:0.2"/>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                            To="1" Duration="0:0:0.2"/>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                            To="1" Duration="0:0:0.2"/>
-        </Storyboard>
+        <!-- Стиль для поисковой строки -->
+        <Style x:Key="SearchBoxStyle" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <TextBox x:Name="textSource"
+                                    Text="{Binding Path=Text,
+                                                 RelativeSource={RelativeSource TemplatedParent},
+                                                 UpdateSourceTrigger=PropertyChanged}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Padding="0"
+                                    VerticalContentAlignment="Center"/>
+                            <TextBlock x:Name="placeholder" 
+                                      Text="Поиск товаров..."
+                                      Foreground="#99000000"
+                                      VerticalAlignment="Center"
+                                      Visibility="Collapsed">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=textSource}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <!-- Шаблон карточки товара -->
         <DataTemplate x:Key="ProductCardTemplate">
             <Border x:Name="cardBorder" 
-                    Width="300" 
-                    Height="500"
+                    Width="320" 
+                    Height="520"
                     Background="White"
-                    CornerRadius="15"
-                    Margin="10"
+                    CornerRadius="25"
+                    Margin="15"
                     BorderThickness="1"
                     BorderBrush="#FFE4E4E4">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="10" 
                                     ShadowDepth="0"
-                                    Color="#FFB6C1"/>
+                                    Color="#20000000"/>
                 </Border.Effect>
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
+                        <TranslateTransform/>
                     </TransformGroup>
                 </Border.RenderTransform>
                 <Border.Triggers>
                     <EventTrigger RoutedEvent="Border.MouseEnter">
-                        <BeginStoryboard Storyboard="{StaticResource CardHover}"/>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                    To="15" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                    To="1.02" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                    To="1.02" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                    To="-2" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
                     </EventTrigger>
                     <EventTrigger RoutedEvent="Border.MouseLeave">
-                        <BeginStoryboard Storyboard="{StaticResource CardUnhover}"/>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.Effect).(DropShadowEffect.BlurRadius)"
+                                    To="10" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                    To="1" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                    To="1" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation 
+                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.Y)"
+                                    To="0" Duration="0:0:0.4">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
                     </EventTrigger>
                 </Border.Triggers>
 
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="250"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
@@ -90,82 +214,145 @@
                     <!-- Изображение товара -->
                     <Border Grid.Row="0" 
                             Background="#FFF5F5F5"
-                            CornerRadius="15,15,0,0">
-                        <Border CornerRadius="15,15,0,0" 
+                            CornerRadius="25,25,0,0">
+                        <Border CornerRadius="25,25,0,0" 
                                 ClipToBounds="True">
-                            <Image Source="{Binding Image_Url}"
-                                   Stretch="UniformToFill"
-                                   RenderOptions.BitmapScalingMode="HighQuality">
-                                <Image.Effect>
-                                    <DropShadowEffect BlurRadius="15" 
-                                                    ShadowDepth="0"
-                                                    Color="#20000000"/>
-                                </Image.Effect>
-                            </Image>
+                            <Grid>
+                                <Image Source="{Binding Image_Url}"
+                                       Stretch="UniformToFill"
+                                       RenderOptions.BitmapScalingMode="HighQuality">
+                                    <Image.Effect>
+                                        <DropShadowEffect BlurRadius="15" 
+                                                        ShadowDepth="0"
+                                                        Color="#20000000"/>
+                                    </Image.Effect>
+                                </Image>
+                                <!-- Градиентное наложение -->
+                                <Border CornerRadius="25,25,0,0">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#00000000" Offset="0.6"/>
+                                            <GradientStop Color="#90000000" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <!-- Цена на изображении -->
+                                <Border VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Background="#FFFFFFFF"
+                                        CornerRadius="15,0,0,0"
+                                        Margin="0,0,0,0"
+                                        Padding="20,10">
+                                    <TextBlock Text="{Binding Price, StringFormat='{}{0:N0} ₽'}"
+                                             Foreground="#FF8C4B77"
+                                             FontSize="24"
+                                             FontWeight="Bold"/>
+                                </Border>
+                            </Grid>
                         </Border>
                     </Border>
 
                     <!-- Информация о товаре -->
-                    <StackPanel Grid.Row="1" Margin="15,10">
+                    <StackPanel Grid.Row="1" Margin="25,20,25,10">
                         <TextBlock Text="{Binding Product_Name}"
-                                 FontSize="18"
-                                 FontWeight="SemiBold"
+                                 FontSize="22"
+                                 FontWeight="Bold"
                                  TextWrapping="Wrap"
-                                 Margin="0,0,0,5"/>
+                                 Margin="0,0,0,10"
+                                 Foreground="#333333"/>
 
                         <TextBlock Text="{Binding Description}"
                                  FontSize="14"
                                  Foreground="#666666"
                                  TextWrapping="Wrap"
-                                 Margin="0,0,0,5"/>
+                                 LineHeight="20"
+                                 TextAlignment="Justify"
+                                 Margin="0,0,0,10"/>
                     </StackPanel>
 
                     <!-- Дополнительная информация -->
-                    <StackPanel Grid.Row="2" Margin="15,0">
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock Text="Категория: "
-                                     Foreground="#666666"/>
-                            <TextBlock Text="{Binding Category}"
-                                     Foreground="#FF8C4B77"
-                                     FontWeight="SemiBold"/>
-                        </StackPanel>
+                    <StackPanel Grid.Row="2" Margin="25,0,25,15">
+                        <!-- Информационные бейджи -->
+                        <WrapPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <!-- Бейдж категории -->
+                            <Border Background="#FFF0F0F0" 
+                                    CornerRadius="15" 
+                                    Padding="12,6" 
+                                    Margin="0,0,8,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🏷️" 
+                                             Margin="0,0,6,0" 
+                                             VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Category}"
+                                             Foreground="#FF8C4B77"
+                                             FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Border>
+                            <!-- Бейдж поставщика -->
+                            <Border Background="#FFF0F0F0" 
+                                    CornerRadius="15" 
+                                    Padding="12,6" 
+                                    Margin="0,0,8,8">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🏢" 
+                                             Margin="0,0,6,0" 
+                                             VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Postavchik}"
+                                             Foreground="#FF8C4B77"
+                                             FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </Border>
+                        </WrapPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock Text="Поставщик: "
-                                     Foreground="#666666"/>
-                            <TextBlock Text="{Binding Postavchik}"
-                                     Foreground="#FF8C4B77"
-                                     FontWeight="SemiBold"/>
-                        </StackPanel>
+                        <!-- Индикатор наличия -->
+                        <Border Background="#FFF8F8F8"
+                                CornerRadius="12"
+                                Padding="15">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,5">
-                            <TextBlock Text="В наличии: "
-                                     Foreground="#666666"/>
-                            <TextBlock Text="{Binding Quantity}"
-                                     Foreground="#FF8C4B77"
-                                     FontWeight="SemiBold"/>
-                            <TextBlock Text=" шт."
-                                     Foreground="#666666"/>
-                        </StackPanel>
+                                <StackPanel Orientation="Horizontal" 
+                                          Grid.Column="0">
+                                    <TextBlock Text="📦" 
+                                             Margin="0,0,8,0" 
+                                             VerticalAlignment="Center"/>
+                                    <TextBlock Text="В наличии:"
+                                             Foreground="#666666"
+                                             VerticalAlignment="Center"/>
+                                </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,10">
-                            <TextBlock Text="Цена: "
-                                     Foreground="#666666"/>
-                            <TextBlock Text="{Binding Price, StringFormat='{}{0:N2} ₽'}"
-                                     Foreground="#FF8C4B77"
-                                     FontSize="16"
-                                     FontWeight="Bold"/>
-                        </StackPanel>
+                                <TextBlock Grid.Column="1"
+                                         HorizontalAlignment="Right">
+                                    <Run Text="{Binding Quantity}"
+                                         Foreground="#FF8C4B77"
+                                         FontWeight="Bold"
+                                         FontSize="16"/>
+                                    <Run Text=" шт."
+                                         Foreground="#666666"/>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
                     </StackPanel>
 
                     <!-- Кнопка покупки -->
                     <Button Grid.Row="3"
                             Content="В корзину"
                             Style="{StaticResource ProductButtonStyle}"
-                            Width="200"
-                            Height="40"
-                            Margin="15"
-                            Click="AddToCart_Click"/>
+                            Width="250"
+                            Height="50"
+                            Margin="0,0,0,20"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Click="AddToCart_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -181,13 +368,78 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Верхняя панель с кнопками управления окном -->
             <Grid Grid.Row="0">
-                <StackPanel Orientation="Horizontal" 
-                          HorizontalAlignment="Right" 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Логотип -->
+                <TextBlock Text="Flower Shop"
+                         FontSize="16"
+                         FontWeight="SemiBold"
+                         Foreground="{StaticResource HeaderGradient}"
+                         Margin="15,0,0,0"
+                         VerticalAlignment="Center">
+                </TextBlock>
+
+                <!-- Кнопка назад -->
+                <Button Grid.Column="1"
+                        Style="{StaticResource WindowButtonStyle}"
+                        HorizontalAlignment="Left"
+                        Margin="10,0,0,0"
+                        Click="CloseButton_Click" Width="60">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="←" 
+                                 FontSize="16" 
+                                 Margin="0,0,5,0"
+                                 VerticalAlignment="Center"/>
+                        <TextBlock Text="Назад"
+                                 FontSize="14"
+                                 VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                        To="-5" Duration="0:0:0.2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CircleEase EasingMode="EaseOut"/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Button.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation 
+                                        Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
+                                        To="0" Duration="0:0:0.2">
+                                        <DoubleAnimation.EasingFunction>
+                                            <CircleEase EasingMode="EaseOut"/>
+                                        </DoubleAnimation.EasingFunction>
+                                    </DoubleAnimation>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                    <Button.RenderTransform>
+                        <TranslateTransform/>
+                    </Button.RenderTransform>
+                </Button>
+
+                <!-- Кнопки управления окном -->
+                <StackPanel Grid.Column="2"
+                          Orientation="Horizontal" 
                           Margin="0,0,5,0">
                     <Button Style="{StaticResource WindowButtonStyle}"
                             Content="—"
@@ -204,25 +456,59 @@
             <!-- Заголовок -->
             <TextBlock Grid.Row="1" 
                       Text="Каталог товаров"
-                      FontSize="24"
-                      FontWeight="SemiBold"
+                      FontSize="32"
+                      FontWeight="Bold"
                       Foreground="#FF8C4B77"
                       HorizontalAlignment="Center"
-                      Margin="0,20,0,20"/>
+                      Margin="0,30,0,20">
+            </TextBlock>
+
+            <!-- Поисковая строка -->
+            <Border Grid.Row="2"
+                    Background="#FFF5F5F5"
+                    CornerRadius="30"
+                    Width="600"
+                    Height="60"
+                    Margin="0,0,0,40">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" 
+                                    ShadowDepth="2"
+                                    Color="#15000000"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="🔍"
+                             FontSize="24"
+                             Foreground="#99000000"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="1"
+                            Style="{StaticResource SearchBoxStyle}"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Height="40"
+                            Margin="0,0,20,0"
+                            VerticalAlignment="Center"
+                            FontSize="16"/>
+                </Grid>
+            </Border>
 
             <!-- Список товаров -->
-            <Grid Grid.Row="2">
-                <ScrollViewer Margin="20"
-                             VerticalScrollBarVisibility="Hidden">
-                    <ItemsControl x:Name="ProductsItemsControl">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel HorizontalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
+            <ScrollViewer Grid.Row="3"
+                         Margin="20,0,20,20"
+                         VerticalScrollBarVisibility="Hidden">
+                <ItemsControl x:Name="ProductsItemsControl"
+                            ItemTemplate="{StaticResource ProductCardTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Border>
 
@@ -232,7 +518,11 @@
                 <Storyboard>
                     <DoubleAnimation Storyboard.TargetName="mainBorder"
                                    Storyboard.TargetProperty="Opacity"
-                                   From="0" To="1" Duration="0:0:0.3"/>
+                                   From="0" To="1" Duration="0:0:0.5">
+                        <DoubleAnimation.EasingFunction>
+                            <CircleEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
